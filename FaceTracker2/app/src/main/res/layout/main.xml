@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/topLayout"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:keepScreenOn="true">
+
+    <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+      <com.google.android.gms.samples.vision.face.facetracker.ui.camera.CameraSourcePreview
+        android:id="@+id/preview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+          <com.google.android.gms.samples.vision.face.facetracker.ui.camera.GraphicOverlay
+              android:id="@+id/faceOverlay"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" />
+
+      </com.google.android.gms.samples.vision.face.facetracker.ui.camera.CameraSourcePreview>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:text="@string/firstInstruction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/instruct"
+            android:textAlignment="center"
+            android:textAppearance="@android:style/TextAppearance.Material.Medium"
+            android:gravity="center"
+            tools:targetApi="lollipop"
+            android:layout_above="@+id/userInput"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="22dp"
+            android:textColor="@color/yellow"/>
+
+        <Button
+            android:text="Next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/nextClick"
+            android:onClick="doNext"
+            android:gravity="center"
+            android:textAlignment="center"
+            style="@style/Widget.AppCompat.Button.Small"
+            android:layout_marginBottom="155dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:text="Name"
+            android:ems="10"
+            android:id="@+id/userInput"
+            android:textAppearance="@android:style/TextAppearance.Material.Medium"
+            android:layout_marginBottom="21dp"
+            android:gravity="center"
+            tools:targetApi="lollipop"
+            android:layout_above="@+id/nextClick"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/yellow"/>
+
+        <TextView
+            android:text="Timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/timer"
+            android:textAppearance="@android:style/TextAppearance.Material.Small"
+            android:visibility="invisible"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/yellow"/>
+
+        <TextView
+            android:text="ENTER THE FOLLOWING MESSAGE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:id="@+id/fixedInstruction"
+            android:layout_above="@+id/instruct"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/lime"
+            android:visibility="invisible" />
+    </RelativeLayout>
+</FrameLayout>
