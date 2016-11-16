@@ -38,12 +38,13 @@ class FaceGraphic extends GraphicOverlay.Graphic {
 
     private static final int COLOR_CHOICES[] = {
         //Color.BLUE,
-        Color.CYAN,
+       /* Color.CYAN,
         Color.GREEN,
         Color.MAGENTA,
         Color.RED,
         Color.WHITE,
-        Color.YELLOW
+        Color.YELLOW*/ //Colors commented not to confuse the user
+            Color.YELLOW
     };
     private static int mCurrentColorIndex = 0;
 
@@ -108,11 +109,16 @@ class FaceGraphic extends GraphicOverlay.Graphic {
         x = translateX(face.getPosition().x + face.getWidth() / 2);
         y = translateY(face.getPosition().y + face.getHeight() / 2);
         canvas.drawCircle(x, y, FACE_POSITION_RADIUS, mFacePositionPaint);
-        canvas.drawText("id: " + mFaceId, x + ID_X_OFFSET, y + ID_Y_OFFSET, mIdPaint);
+
+
+        /***Information on face parts to be printed onto the face***/
+        /*canvas.drawText("id: " + mFaceId, x + ID_X_OFFSET, y + ID_Y_OFFSET, mIdPaint);
         canvas.drawText("happiness: " + String.format("%.2f", face.getIsSmilingProbability()), x - ID_X_OFFSET, y - ID_Y_OFFSET, mIdPaint);
         canvas.drawText("right eye: " + String.format("%.2f", face.getIsRightEyeOpenProbability()), x + ID_X_OFFSET * 2, y + ID_Y_OFFSET * 2, mIdPaint);
         canvas.drawText("left eye: " + String.format("%.2f", face.getIsLeftEyeOpenProbability()), x - ID_X_OFFSET*2, y - ID_Y_OFFSET*2, mIdPaint);
+        */
 
+        /***Code to get the Landmarks on the face***/
         /*for(Landmark landmark : face.getLandmarks()){
             if(landmark.getType() == Landmark.NOSE_BASE){
                 //Bitmap moustache = BitmapFactory.decodeResource(resources, R.drawable.moustache);
@@ -120,7 +126,9 @@ class FaceGraphic extends GraphicOverlay.Graphic {
                 break;
             }
         }
+
         */
+
         // Draws a bounding box around the face.
         float xOffset = scaleX(face.getWidth() / 2.0f);
         float yOffset = scaleY(face.getHeight() / 2.0f);

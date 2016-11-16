@@ -114,7 +114,7 @@ public final class FaceTrackerActivity extends AppCompatActivity {
     private Random genIndex;
 
     //database
-   // private FirebaseDatabase firebaseID;
+
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference firebaseID;
     private DatabaseReference content;
@@ -123,17 +123,6 @@ public final class FaceTrackerActivity extends AppCompatActivity {
 
 
 
-
-/*
-    Context context ;
-    FaceInfoHelper faceInfoHelper;
-    SQLiteDatabase sqlitedatabase;*/
-
-
-   /* public void setIdNum(int num){
-        this.IdNum[0] = num;
-    }
-*/
     //==============================================================================================
     // Activity Methods
     //==============================================================================================
@@ -212,9 +201,6 @@ public final class FaceTrackerActivity extends AppCompatActivity {
 
 
         //*******added code******
-
-
-
 
 
         click =(Button) findViewById(R.id.nextClick);
@@ -361,6 +347,10 @@ public final class FaceTrackerActivity extends AppCompatActivity {
             userData.setText("");
             instruction.setText(textToDisplay);
 
+            /*Storing username into Firebase*/
+
+            content.child("Username").setValue(userName);
+
             // pause p = new pause(5);
 
             final String finalTextToDisplay = textToDisplay;
@@ -385,7 +375,7 @@ public final class FaceTrackerActivity extends AppCompatActivity {
                     instruction.append(getResources().getString(R.string.toStart));
                     this.cancel();
                     */
-                    alreadyGen[0] = genIndex.nextInt(30);
+                    alreadyGen[0] = genIndex.nextInt(getResources().getStringArray(R.array.commonTexts).length);
                     //instruction.setText("Test 1";);
                     userData.clearComposingText();
                     instruction.setText(getResources().getStringArray(R.array.commonTexts)[alreadyGen[0]]);
@@ -421,14 +411,21 @@ public final class FaceTrackerActivity extends AppCompatActivity {
 
             };*/
 
+                    new CountDownTimer(200000, 100) {
                         int sec = 0;
                         @Override
                         public void onTick(long millisUntilFinished) {
+                            long timeCompleted = 200000 - millisUntilFinished;
+                            _tv.setText(String.format("%02d : %02d",
                                     TimeUnit.MILLISECONDS.toMinutes(timeCompleted),
 
                                     TimeUnit.MILLISECONDS.toSeconds(timeCompleted) -
+                                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(timeCompleted))));
 
+                                    /*TimeUnit.MILLISECONDS.toMillis(timeCompleted) -
                                             TimeUnit.SECONDS.toMillis(TimeUnit.MILLISECONDS.toSeconds(timeCompleted) -
+                                                    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(timeCompleted)))*/
+
 
                                     content.child(Integer.toString(sec)).child("x").setValue((int)FaceGraphic.x);
                                     content.child(Integer.toString(sec++)).child("y").setValue((int)FaceGraphic.y);
@@ -468,7 +465,12 @@ public final class FaceTrackerActivity extends AppCompatActivity {
                 String message = userData.getText().toString();
                 String faceid = Integer.toString(n);
                 timeToStore(faceid ,message);   //store in database */
-                AlertDialog alertDialog = new AlertDialog.Builder(FaceTrackerActivity.this).create();
+
+                /**Alert box on successful entry by the user**/
+
+
+                /*AlertDialog alertDialog = new AlertDialog.Builder(FaceTrackerActivity.this).create();
+
                 alertDialog.setTitle("Success" );
                 alertDialog.setMessage("Click 'OK' for next quote");
                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
@@ -477,19 +479,19 @@ public final class FaceTrackerActivity extends AppCompatActivity {
                                 dialog.dismiss();
                             }
                         });
-                alertDialog.show();
+                alertDialog.show();*/
                 //userData.clearComposingText();
+                Toast.makeText(getApplicationContext(), "Go Ahead :)",
+                        Toast.LENGTH_SHORT).show();
                 userData.setText("");
             }
 
-            if(countClicks >= 30)
-                finish();
+//            if(countClicks >= 30)
+//                finish();
 
             while(true){
 
-                /* FIND A SOLUTION TO THIS PROBLEM */
-                //  nextIndex = genIndex.nextInt(((int) R.integer.noOfCommonTexts));
-                nextIndex = genIndex.nextInt(30);
+                nextIndex = (genIndex.nextInt(getResources().getStringArray(R.array.commonTexts).length));
                 boolean found = false;
                 for(int i = 0; i < alreadyGen.length && alreadyGen[i] != -1; i++) {
                     if (alreadyGen[i] == nextIndex) {

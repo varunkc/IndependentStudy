@@ -8,25 +8,25 @@
     <string name="nextInstruction">Next</string>
     <string name="firstInstruction">Enter your name to begin</string>
     <string name="greet">Hi,  </string>
-    <string name="beginContext"> ! Lets get distracted …</string>
+    <string name="beginContext"> ! Lets Check you distraction Level :)</string>
     <string name="toStart">Let\'s begin !!!</string>
     <integer name="noOfCommonTexts">30</integer>
     <string-array name="commonTexts">
         <item>Hello!</item>
         <item>Whats up?</item>
-        <item>Im good</item>
-        <item>ok</item>
+        <item>I\'m good</item>
+        <item>Ok</item>
         <item>busy now</item>
-        <item>Im driving</item>
+        <item>I\'m driving</item>
         <item>ttyl</item>
         <item>Im in class</item>
-        <item>Cant text now</item>
+        <item>Can\'t text now</item>
         <item>thanks</item>
-        <item>Im on the way</item>
+        <item>I\'m on the way</item>
         <item>brb</item>
         <item>Call later?</item>
         <item>Bored</item>
-        <item>sure</item>
+        <item>are you sure</item>
         <item>lol</item>
         <item>awesome</item>
         <item>Heya!</item>
@@ -39,14 +39,35 @@
         <item>have fun</item>
         <item>no</item>
         <item>texting</item>
-        <item>five minutes</item>
+        <item>five minutes.</item>
         <item>there?</item>
-        <item>shall call you</item>
+        <item>shall call you later.</item>
+        <item>where are we meeting?</item>
+        <item>How far is it?</item>
+        <item>shall we go for a movie today?</item>
+        <item>what plans for the weekend?</item>
+        <item>Have a good day :)</item>
+        <item>Have a good night!</item>
+        <item>How are you doing today?</item>
+        <item>how was your day?</item>
+        <item>At work, will call you in some time</item>
+        <item>sorry, din\'t check your message :|</item>
+        <item>after a long time...</item>
+        <item>shall see you tomorrow</item>
+        <item>that was a good one :D</item>
+        <item>haha.. that was funny :D</item>
+        <item>seriously ?</item>
+        <item>wow! this is really great.</item>
+        <item>never mind</item>
+        <item>Is everything ok?</item>
+        <item>My bad</item>
+        <item>My phone got switched off</item>
+        <item>just home :)</item>
     </string-array>
 
     <!--Color Codes-->
 
-    <color name="white">#FFFFFF</color>
+    <color name="white">#ffffff</color>
     <color name="yellow">#FFFF00</color>
     <color name="fuchsia">#FF00FF</color>
     <color name="red">#FF0000</color>
@@ -55,7 +76,7 @@
     <color name="olive">#808000</color>
     <color name="purple">#800080</color>
     <color name="maroon">#800000</color>
-    <color name="aqua">#00FFFF</color>
+    <color name="aqua">#7e8181</color>
     <color name="lime">#00FF00</color>
     <color name="teal">#008080</color>
     <color name="green">#008000</color>
