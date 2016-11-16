@@ -73,11 +73,13 @@ import java.util.Date;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 import static android.R.attr.value;
 import static android.view.KeyEvent.KEYCODE_ENTER;
 import static com.google.android.gms.vision.face.Landmark.NOSE_BASE;
 import static java.lang.Boolean.TRUE;
+import static java.sql.Types.NULL;
 
 /**
  * Activity for the face tracker app.  This app detects faces with the rear facing camera, and draws
@@ -377,7 +379,6 @@ public final class FaceTrackerActivity extends AppCompatActivity {
                 }
 
 
-
                 @Override
                 public void onFinish() {
                    /* instruction.setText("");
@@ -394,14 +395,16 @@ public final class FaceTrackerActivity extends AppCompatActivity {
                     alreadyGen[1] = -1;
                     countClicks++;
 
-                    final TextView _tv = (TextView) findViewById( R.id.timer );
+                    Date tCompleted = new Date(NULL);
+                    SimpleDateFormat simpleDF = new SimpleDateFormat();
+                    final TextView _tv = (TextView) findViewById(R.id.timer);
                     _tv.setVisibility(View.VISIBLE);
-                    new CountDownTimer(300000, 100) {
+                   /* new CountDownTimer(300000, 100) {
                         int sec = 0;
                         public void onTick(long millisUntilFinished) {
                             long timeCompleted = 300000 - millisUntilFinished;
 
-                            _tv.setText("" +new SimpleDateFormat("mm:ss:SS").format(new Date( timeCompleted )));
+                            _tv.setText("" +simpleDF("mm:ss").format(tCompleted( timeCompleted )));
 
                             content.child(Integer.toString(sec)).child("x").setValue((int)FaceGraphic.x);
                             content.child(Integer.toString(sec++)).child("y").setValue((int)FaceGraphic.y);
@@ -416,8 +419,30 @@ public final class FaceTrackerActivity extends AppCompatActivity {
                 }
 
 
-            };
+            };*/
 
+                        int sec = 0;
+                        @Override
+                        public void onTick(long millisUntilFinished) {
+                                    TimeUnit.MILLISECONDS.toMinutes(timeCompleted),
+
+                                    TimeUnit.MILLISECONDS.toSeconds(timeCompleted) -
+
+                                            TimeUnit.SECONDS.toMillis(TimeUnit.MILLISECONDS.toSeconds(timeCompleted) -
+
+                                    content.child(Integer.toString(sec)).child("x").setValue((int)FaceGraphic.x);
+                                    content.child(Integer.toString(sec++)).child("y").setValue((int)FaceGraphic.y);
+
+                        }
+
+                        @Override
+                        public void onFinish() {
+
+                        }
+                    }.start();
+
+                }
+            };
             timer.start();
 
 
