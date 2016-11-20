@@ -103,7 +103,7 @@ public final class FaceTrackerActivity extends AppCompatActivity {
     private Handler mHandler = new Handler();
     //extra additions
     private Button click;
-    private TextView instruction,score;
+    private TextView instruction;
     private EditText userData;
     private TextView fixed;
     private int countClicks, nextIndex;
@@ -120,7 +120,6 @@ public final class FaceTrackerActivity extends AppCompatActivity {
     private DatabaseReference content;
     public String sIdNum;
     public final int[] IdNum = {0, 0};
-    public int correctCount = 0;
 
 
 
@@ -208,7 +207,6 @@ public final class FaceTrackerActivity extends AppCompatActivity {
         instruction = (TextView) findViewById(R.id.instruct);
         fixed = (TextView) findViewById(R.id.fixedInstruction);
         userData = (EditText) findViewById(R.id.userInput);
-        score = (TextView) findViewById(R.id.count);
         userName="";
         countClicks = 0;
         alreadyGen = new int[31];
@@ -462,7 +460,6 @@ public final class FaceTrackerActivity extends AppCompatActivity {
                 return;
             }
             else{
-                ++correctCount;
                /* Random rand = new Random();
                 int n= rand.nextInt(30);
                 String message = userData.getText().toString();
@@ -484,9 +481,8 @@ public final class FaceTrackerActivity extends AppCompatActivity {
                         });
                 alertDialog.show();*/
                 //userData.clearComposingText();
-                Toast.makeText(getApplicationContext(), "Nice \n points : +1",
+                Toast.makeText(getApplicationContext(), "Go Ahead :)",
                         Toast.LENGTH_SHORT).show();
-                score.setText(Integer.toString(correctCount));
                 userData.setText("");
             }
 

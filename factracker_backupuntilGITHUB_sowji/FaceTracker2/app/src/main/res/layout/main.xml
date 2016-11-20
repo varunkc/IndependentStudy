@@ -35,33 +35,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@color/aqua"
-        android:alpha="1"
-        android:elevation="1dp">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-        <TextView
-            android:text="Correct:"
-            android:layout_width="50dp"
-            android:layout_weight="0"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:id="@+id/correctScore"
-            android:layout_above="@+id/instruct"
-            android:layout_centerHorizontal="true"
-            android:textColor="@color/white" />
-        <TextView
-            android:text="ch"
-            android:layout_width="30dp"
-
-            android:layout_height="wrap_content"
-            android:gravity="right"
-
-            android:id="@+id/count"
-            android:layout_above="@+id/instruct"
-            android:textColor="@color/white" />
-        </LinearLayout>
+        android:alpha="0.9">
 
         <!--
         <Button android:layout_width="fill_parent"
@@ -164,7 +138,10 @@
                 android:gravity="center"
                 android:textAlignment="center"
                 style="@style/Widget.AppCompat.Button.Small"
-                android:layout_marginTop="325dp" />
+                android:layout_marginTop="325dp"
+
+
+                />
         </LinearLayout>
     </RelativeLayout>
 </FrameLayout>
