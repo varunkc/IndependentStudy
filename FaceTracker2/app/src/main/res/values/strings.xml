@@ -4,65 +4,107 @@
     <string name="permission_camera_rationale">Access to the camera is needed for detection</string>
     <string name="no_camera_permission">This application cannot run because it does not have the camera permission.  The application will now exit.</string>
     <string name="low_storage_error">Face detector dependencies cannot be downloaded due to low device storage</string>
-    <string name="app_name">Double D</string>
+    <string name="app_name">Know your Texas</string>
     <string name="nextInstruction">Next</string>
     <string name="firstInstruction">Enter your name to begin</string>
     <string name="greet">Hi,  </string>
     <string name="beginContext"> ! Lets Check you distraction Level :)</string>
     <string name="toStart">Let\'s begin !!!</string>
-    <integer name="noOfCommonTexts">30</integer>
+    <integer name="noOfCommonTexts">10</integer>
     <string-array name="commonTexts">
-        <item>Hello!</item>
-        <item>Whats up?</item>
-        <item>I\'m good</item>
-        <item>Ok</item>
-        <item>busy now</item>
-        <item>I\'m driving</item>
-        <item>ttyl</item>
-        <item>Im in class</item>
-        <item>Can\'t text now</item>
-        <item>thanks</item>
-        <item>I\'m on the way</item>
-        <item>brb</item>
-        <item>Call later?</item>
-        <item>Bored</item>
-        <item>are you sure</item>
-        <item>lol</item>
-        <item>awesome</item>
-        <item>Heya!</item>
-        <item>Sorry</item>
-        <item>traffic jam</item>
-        <item>battery low</item>
-        <item>cant hear you</item>
-        <item>see you</item>
-        <item>bye</item>
-        <item>have fun</item>
-        <item>no</item>
-        <item>texting</item>
-        <item>five minutes.</item>
-        <item>there?</item>
-        <item>shall call you later.</item>
-        <item>where are we meeting?</item>
-        <item>How far is it?</item>
-        <item>shall we go for a movie today?</item>
-        <item>what plans for the weekend?</item>
-        <item>Have a good day :)</item>
-        <item>Have a good night!</item>
-        <item>How are you doing today?</item>
-        <item>how was your day?</item>
-        <item>At work, will call you in some time</item>
-        <item>sorry, din\'t check your message :|</item>
-        <item>after a long time...</item>
-        <item>shall see you tomorrow</item>
-        <item>that was a good one :D</item>
-        <item>haha.. that was funny :D</item>
-        <item>seriously ?</item>
-        <item>wow! this is really great.</item>
-        <item>never mind</item>
-        <item>Is everything ok?</item>
-        <item>My bad</item>
-        <item>My phone got switched off</item>
-        <item>just home :)</item>
+        <item>Texas is popularly known as  _ _ _   _ o n e   _ _ _ _ state?</item>
+        <item>One of the six nations that ruled Texas: M _ _ _  c o</item>
+        <item>_ o o _ comes from the state of Texas than any other state.</item>
+        <item>Texas was an _ _ _ _ p e n _ _ _ _   state from 1836 to 1845.</item>
+        <item>Caddo  L _ _ _  is the only natural L _ _ _ in Texas.</item>
+        <item>_ _ _ t i n  is considered the live musical capital of the world.</item>
+        <item>D _   P _ p _ _ _ is the oldest major soft drink invented in USA.</item>
+        <item>First suspension bridge in the USA is the Waco b_ _ d _ e. </item>
+        <item>Texas comes from the \'Hasinai\' Indian word tejas meaning _ _ _ e n d s.</item>
+        <item>Texas has the first domed s _ _ d _ u m  in the country.</item>
+        <item>Worst natural disaster in USA by a hurricane hit _ _ _ v e s t _ _.</item>
+        <item>45 inches of rain was witnessed  at A_vi_ due to Tropical Storm claudette in july, 1979.</item>
+        <item>T_x_s is only state to enter the USA by treaty instead of territorial annexation.</item>
+        <item>Ho__t_n served as governer of Tennessee before coming to Texas.</item>
+        <item>The famous Texan, S_m H_ust_n was actually born in Virginia.</item>
+        <item>The Hertzberg Circus Mu_e_m in San Antonio has world\'s largest assortments of circusana.</item>
+        <item>Texas is home to Dell and C_mp_q computers.</item>
+        <item>Texas is referred to as the Si__c_n Va__ey of the south.</item>
+        <item>The armadillo(animal) is the official state ma__al.</item>
+        <item>The Houston Comets are the only team in the country to win four back to back WNBA Ch_mp_onS_ip.</item>
+        <item>The first work spoken from the m__n on july 20th, 1969 was Houston.</item>
+        <item>Texas has three of top ten populous cities in U_it_d S_at_s.</item>
+        <item>Texas includes 7.4%of the nation\'s total a__a.</item>
+        <item>More land is f_rm_d in Texas than any other state.</item>
+        <item>Many species of ba_s live in Texas than in any other part of the USA.</item>
+        <item>Texas is s_co_d largest of the 50 states in the United States of America.</item>
+        <item>Houston has the world\'s largest space program at N_S_ called as Johnson Space center.</item>
+        <item>Sam Houston was elected as 7th Governor of T_nn_ss__.</item>
+        <item>Two Texas-born Americans became pr_sid_n_s and claimed Texas as their home state.</item>
+        <item>O_car, the Academy Award statuette, was unofficially names after a Texan, Oscar Pierce.</item>
+        <item>Sam Houston\'s statue called, \"Tr_but_ to courage\" is the world\'s largest freestanding statue of an American.</item>
+        <item>The Texasan i_l_nds are the projecting tops of the biggest mountain range in the world.</item>
+        <item>Under-sea v_lcan_es that erupted millions of years ago formed the islands of Texas.</item>
+        <item>Texas c_pi_al, Austin, is named after the father of Texas, Stephen Fuller Austin.</item>
+        <item>Dallas Worth Airport has more public p_rki_g spaces than any other airport in the USA.</item>
+        <item>San Jacinto m_nu_e_t is world\'s tallest war memorial.</item>
+        <item>The St_r at the top of the San Jacinto monument weighs 220-tons.</item>
+        <item>Dallas Fort Worth International A_rp__t is the second biggest in the United States.</item>
+        <item>Rio Grande is the 1896 miles longest r_v_r on the border between Texas and Mexico.</item>
+        <item>Integrated C_rc__t (IC) was invented by Jack Kilby while working at Texas Instruments (TI) in Dallas.</item>
+        <item>P_can tree is the Texas\' state tree.</item>
+        <item>In 1901,the Texas Legislature named the Bluebonnet as the State Fl_w__.</item>
+        <item>The bluebonnet flower is also called as b_ff_lo clover.</item>
+        <item>Texas became the 28th state of the U_io_ on December 29, 1845.</item>
+        <item>The white lone star in Texas flag stands for our un_ty as one for God, State and Country.</item>
+    </string-array>
+
+    <string-array name="answers">
+        <item>the lone star</item>
+        <item>mexico</item>
+        <item>wool</item>
+        <item>independent</item>
+        <item>lake</item>
+        <item>austin</item>
+        <item>dr pepper</item>
+        <item>bridge</item>
+        <item>friends</item>
+        <item>stadium</item>
+        <item>galveston</item>
+        <item>alvin</item>
+        <item>texas</item>
+        <item>Houston</item>
+        <item>Sam Houston</item>
+        <item>Museum</item>
+        <item>Compaq</item>
+        <item>Silicon Valley</item>
+        <item>Mammal</item>
+        <item>ChampionShip</item>
+        <item>moon</item>
+        <item>United States</item>
+        <item>area</item>
+        <item>Farmed</item>
+        <item>bats</item>
+        <item>Second</item>
+        <item>nasa</item>
+        <item>Tennessee</item>
+        <item>presidents</item>
+        <item>Oscar</item>
+        <item>Tribute</item>
+        <item>islands</item>
+        <item>volcanoes</item>
+        <item>capital</item>
+        <item>parking</item>
+        <item>monument</item>
+        <item>star</item>
+        <item>Airport</item>
+        <item>river</item>
+        <item>Circuit</item>
+        <item>pecan</item>
+        <item>flower</item>
+        <item>buffalo</item>
+        <item>union</item>
+        <item>unity</item>
     </string-array>
 
     <!--Color Codes-->

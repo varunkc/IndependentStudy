@@ -76,7 +76,6 @@ import java.util.Random;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
-import static android.R.attr.id;
 import static android.R.attr.value;
 import static android.view.KeyEvent.KEYCODE_ENTER;
 import static com.google.android.gms.vision.face.Landmark.NOSE_BASE;
@@ -104,11 +103,11 @@ public final class FaceTrackerActivity extends AppCompatActivity {
 
     private Handler mHandler = new Handler();
     //extra additions
-    private Button click, nextQuestion;
+    private Button click;
     private TextView instruction,score;
     private EditText userData;
     private TextView fixed;
-    private int countClicks, nextIndex, questionCount;
+    private int countClicks, nextIndex;
 
     private int[] alreadyGen;
     private String userName;
@@ -207,28 +206,31 @@ public final class FaceTrackerActivity extends AppCompatActivity {
 
 
         click =(Button) findViewById(R.id.nextClick);
-        nextQuestion = (Button) findViewById(R.id.pass);
         instruction = (TextView) findViewById(R.id.instruct);
         fixed = (TextView) findViewById(R.id.fixedInstruction);
         userData = (EditText) findViewById(R.id.userInput);
         score = (TextView) findViewById(R.id.count);
         userName="";
         countClicks = 0;
-        alreadyGen = new int[getResources().getStringArray(R.array.commonTexts).length];
+        alreadyGen = new int[31];
         genIndex = new Random();
-        questionCount = 0;
+
         //listener to check the text entered in that field
         userData.setText("");
         userData.addTextChangedListener(textWatcher);
         userData.setOnKeyListener(detectEnter);
         checkFieldForEmptyValues();
 
+        //FBDatabase fb = new FBDatabase();
+
+       // fb.run();
+        //*******added code******
+
 
         firebaseDatabase = FirebaseDatabase.getInstance();
 
         firebaseID = firebaseDatabase.getReference("ID");
         content = firebaseDatabase.getReference("ID");
-
         //firebaseID.setValue("1");
 
 
@@ -274,8 +276,16 @@ public final class FaceTrackerActivity extends AppCompatActivity {
                 // whenever data at this location is updated.
                 String IdValue = dataSnapshot.getValue(String.class);
 
-                FaceTrackerActivity.this.IdNum[0] = Integer.parseInt(IdValue);
+                /*if(IdValue != null){
+                    tcs.setResult(IdValue);
+                }*/ //unable to synchronize data
 
+
+                FaceTrackerActivity.this.IdNum[0] = Integer.parseInt(IdValue);
+                //IdNum[0]++;
+                //setIdNum(Integer.parseInt(IdValue));
+                //Log.d(TAG, "Value is: " + Integer.toString(IdNum));
+                //instruction.setText(Integer.toString(IdNum[0]));
                 content = firebaseID.getParent().child(String.valueOf(IdNum[0]));
                 firebaseID.setValue(Integer.toString(IdNum[0] + 1));
             }
@@ -291,9 +301,38 @@ public final class FaceTrackerActivity extends AppCompatActivity {
         firebaseID.addListenerForSingleValueEvent(fd);
 
 
+        /*try {
+            Tasks.await(tcsTask);
+        }catch(ExecutionException e){
+            //handle exception
+        }catch (InterruptedException e){
+            //handle exception
+        }*/ //unable to synchronize data
 
         sIdNum = Integer.toString(IdNum[0]+1);
+      /*  Runnable myRunnable = new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                //click.setText(Integer.toString(IdNum[0]));
 
+                //firebaseID.setValue(sIdNum);
+                //content = content.child(sIdNum);
+                //click.setText(sIdNum);
+                //  content = firebaseID.getParent().child(sIdNum);
+//                content.child("1000").child("x").setValue("1");
+//                content.child("1000").child("y").setValue("1");
+                //content.child("1000").child("2").setValue("1");
+
+            }
+        };
+        mHandler.postDelayed(myRunnable, 5000);*/
+
+
+
+
+        //click.setText(Integer.toString(IdNum[0]));
 
 
     }
@@ -339,27 +378,43 @@ public final class FaceTrackerActivity extends AppCompatActivity {
                     instruction.append(getResources().getString(R.string.toStart));
                     this.cancel();
                     */
-
                     alreadyGen[0] = genIndex.nextInt(getResources().getStringArray(R.array.commonTexts).length);
                     //instruction.setText("Test 1";);
-                    countClicks++;
-                    nextIndex = alreadyGen[0];
                     userData.clearComposingText();
                     instruction.setText(getResources().getStringArray(R.array.commonTexts)[alreadyGen[0]]);
                     fixed.setVisibility(View.VISIBLE);
-                    nextQuestion.setVisibility(View.VISIBLE);
 
-                    for (int i = 1; i < alreadyGen.length; i++)
-                        alreadyGen[i] = -1;
 
+                    alreadyGen[1] = -1;
+                    countClicks++;
 
                     Date tCompleted = new Date(NULL);
                     SimpleDateFormat simpleDF = new SimpleDateFormat();
                     final TextView _tv = (TextView) findViewById(R.id.timer);
                     _tv.setVisibility(View.VISIBLE);
+                   /* new CountDownTimer(300000, 100) {
+                        int sec = 0;
+                        public void onTick(long millisUntilFinished) {
+                            long timeCompleted = 300000 - millisUntilFinished;
+
+                            _tv.setText("" +simpleDF("mm:ss").format(tCompleted( timeCompleted )));
+
+                            content.child(Integer.toString(sec)).child("x").setValue((int)FaceGraphic.x);
+                            content.child(Integer.toString(sec++)).child("y").setValue((int)FaceGraphic.y);
+                        }
+
+                        public void onFinish() {
+                            _tv.setText("done!");
+                        }
+                    }.start();
 
 
-                    new CountDownTimer(200000, 250) {
+                }
+
+
+            };*/
+
+                    new CountDownTimer(200000, 100) {
                         int sec = 0;
                         @Override
                         public void onTick(long millisUntilFinished) {
@@ -369,6 +424,11 @@ public final class FaceTrackerActivity extends AppCompatActivity {
 
                                     TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) -
                                             TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
+
+                                    /*TimeUnit.MILLISECONDS.toMillis(timeCompleted) -
+                                            TimeUnit.SECONDS.toMillis(TimeUnit.MILLISECONDS.toSeconds(timeCompleted) -
+                                                    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(timeCompleted)))*/
+
 
                                     content.child(Integer.toString(sec)).child("x").setValue((int)FaceGraphic.x);
                                     content.child(Integer.toString(sec++)).child("y").setValue((int)FaceGraphic.y);
@@ -388,8 +448,7 @@ public final class FaceTrackerActivity extends AppCompatActivity {
 
         }
         else{
-
-            if(!((getResources().getStringArray(R.array.answers)[nextIndex].toString().toLowerCase()).equals(userData.getText().toString().toLowerCase()))){
+            if(!instruction.getText().toString().equals(userData.getText().toString())){
                 AlertDialog alertDialog = new AlertDialog.Builder(FaceTrackerActivity.this).create();
                 alertDialog.setTitle("Error\n");
                 alertDialog.setMessage("Oops! Concentrate more and try again!");
@@ -405,7 +464,27 @@ public final class FaceTrackerActivity extends AppCompatActivity {
             }
             else{
                 ++correctCount;
-                questionCount++;
+               /* Random rand = new Random();
+                int n= rand.nextInt(30);
+                String message = userData.getText().toString();
+                String faceid = Integer.toString(n);
+                timeToStore(faceid ,message);   //store in database */
+
+                /**Alert box on successful entry by the user**/
+
+
+                /*AlertDialog alertDialog = new AlertDialog.Builder(FaceTrackerActivity.this).create();
+
+                alertDialog.setTitle("Success" );
+                alertDialog.setMessage("Click 'OK' for next quote");
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                alertDialog.show();*/
+                //userData.clearComposingText();
                 Toast.makeText(getApplicationContext(), "Nice \n points : +1",
                         Toast.LENGTH_SHORT).show();
                 score.setText(Integer.toString(correctCount));
@@ -416,35 +495,21 @@ public final class FaceTrackerActivity extends AppCompatActivity {
 //                finish();
 
             while(true){
-                int i;
-                boolean found;
+
                 nextIndex = (genIndex.nextInt(getResources().getStringArray(R.array.commonTexts).length));
-                found = false;
-                for(i = 0; (i < alreadyGen.length) && (alreadyGen[i] != -1); i++) {
+                boolean found = false;
+                for(int i = 0; i < alreadyGen.length && alreadyGen[i] != -1; i++) {
                     if (alreadyGen[i] == nextIndex) {
                         found = true;
-
                         break;
                     }
-                }
-                Log.d(TAG,"COUNT = "+countClicks+"i = "+i);
-                if( countClicks == alreadyGen.length) {
-                    i = countClicks - 1;
-                    while (i > -1) {
-                        alreadyGen[i--] = -1;
-                    }
-                    alreadyGen[0] = nextIndex;
-                    countClicks = 1;
-                    break;
                 }
                 if(found)
                     continue;
                 else {
                     countClicks++;
-                    alreadyGen[i] = nextIndex;
                     break;
                 }
-
             }
             /*if (nextIndex > 30)
                 nextIndex = 0;*/
@@ -454,7 +519,20 @@ public final class FaceTrackerActivity extends AppCompatActivity {
 
         }
     }
+    /**
+     * Handles the requesting of the camera permission.  This includes
+     * showing a "Snackbar" message of why the permission is needed then
+     * sending the request.
+     */
+   /* public void timeToStore(String faceid,String message)
+    {
+        faceInfoHelper = new FaceInfoHelper(getApplicationContext());
+        sqlitedatabase = openOrCreateDatabase("FaceInfo.db",context.MODE_PRIVATE,null);
+        faceInfoHelper.InsertInfo(faceid ,message,sqlitedatabase );
 
+        Toast.makeText(getBaseContext(),"Data inserted and saved!!",Toast.LENGTH_LONG).show();
+        faceInfoHelper.close();
+    }*/
     private void requestCameraPermission() {
         Log.w(TAG, "Camera permission is not granted. Requesting permission");
 
@@ -501,7 +579,14 @@ public final class FaceTrackerActivity extends AppCompatActivity {
                         .build());
 
         if (!detector.isOperational()) {
-
+            // Note: The first time that an app using face API is installed on a device, GMS will
+            // download a native library to the device in order to do detection.  Usually this
+            // completes before the app is run for the first time.  But if that download has not yet
+            // completed, then the above call will not detect any faces.
+            //
+            // isOperational() can be used to check if the required native library is currently
+            // available.  The detector will automatically become operational once the library
+            // download completes on device.
             Log.w(TAG, "Face detector dependencies are not yet available.");
         }
 
