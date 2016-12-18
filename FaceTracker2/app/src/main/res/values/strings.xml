@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="ok">OK</string>
+    <string name="toastmsg">GOOD JOB!!</string>
     <string name="permission_camera_rationale">Access to the camera is needed for detection</string>
     <string name="no_camera_permission">This application cannot run because it does not have the camera permission.  The application will now exit.</string>
     <string name="low_storage_error">Face detector dependencies cannot be downloaded due to low device storage</string>
@@ -8,7 +9,7 @@
     <string name="nextInstruction">Next</string>
     <string name="firstInstruction">Enter your name to begin</string>
     <string name="greet">Hi,  </string>
-    <string name="beginContext"> ! Lets Check you distraction Level :)</string>
+    <string name="beginContext"> ! Your game begins in...</string>
     <string name="toStart">Let\'s begin !!!</string>
     <integer name="noOfCommonTexts">10</integer>
     <string-array name="commonTexts">
@@ -113,7 +114,7 @@
     <color name="yellow">#FFFF00</color>
     <color name="fuchsia">#FF00FF</color>
     <color name="red">#FF0000</color>
-    <color name="silver">#C0C0C0</color>
+    <color name="silver">#6bd2fa</color>
     <color name="gray">#808080</color>
     <color name="olive">#808000</color>
     <color name="purple">#800080</color>

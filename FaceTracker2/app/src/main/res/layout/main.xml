@@ -33,7 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/aqua"
+        android:background="@drawable/knowyourtexas2"
         android:alpha="1"
         android:elevation="1dp">
 
@@ -42,22 +42,24 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
         <TextView
-            android:text="Score:"
-            android:layout_width="50dp"
-            android:layout_weight="0"
+            android:text="SCORE:"
+            android:layout_width="wrap_content"
+
             android:layout_height="wrap_content"
             android:gravity="right"
             android:id="@+id/correctScore"
             android:layout_above="@+id/instruct"
             android:layout_centerHorizontal="true"
-            android:textColor="@color/white" />
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="4dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
         <TextView
             android:text="0"
-            android:layout_width="30dp"
-
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="right"
-
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="15dp"
             android:id="@+id/count"
             android:layout_above="@+id/instruct"
             android:textColor="@color/white" />
@@ -83,12 +85,23 @@
             android:layout_weight="1.29" />-->
 
         <TextView
+            android:id="@+id/ClockText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="245dp"
+            android:layout_marginTop="4dp"
+            android:visibility="invisible"
+            android:text="Time Remaining:"
+            android:textColor="@color/white"/>
+
+        <TextView
             android:text="@string/firstInstruction"
+            android:textSize="18dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
             android:id="@+id/instruct"
-            android:textAppearance="@android:style/TextAppearance.Material.Small"
+            android:textAppearance="@android:style/TextAppearance.Material.Body2"
             android:gravity="center"
             tools:targetApi="lollipop"
             android:layout_marginTop="255dp"
@@ -110,10 +123,11 @@
             android:paddingTop="4dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:paddingRight="4dp" />
+            android:layout_marginRight="4dp" />
 
         <TextView
             android:text="ENTER THE FOLLOWING MESSAGE"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
@@ -126,36 +140,50 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="150dp">
+            android:layout_marginTop="150dp"
+            android:orientation="vertical">
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Next Question"
                 android:visibility="invisible"
-                android:id="@+id/pass"/>
+                android:id="@+id/pass"
+                android:onClick="generateQuestion"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:text="Guess the Mi_ss_inG word !!"
+                android:textColor="@color/lime"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="120dp"
+                android:id="@+id/guess"
+                android:visibility="invisible"/>
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_alignParentTop="true"
+            android:clickable="false"
+            android:layout_alignTop="@+id/ClockText"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:clickable="false">
+            android:layout_alignParentStart="true">
 
 
 
             <EditText android:layout_weight= "1"
-                android:textStyle="bold"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
                 android:text="Name"
                 android:ems="10"
                 android:id="@+id/userInput"
-                android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                android:textAppearance="@android:style/TextAppearance.Material.Body2"
 
                 android:layout_marginTop="325dp"
                 android:gravity="center"
@@ -163,7 +191,7 @@
 
                 android:layout_marginBottom="91dp"
 
-                android:textColor="@color/common_google_signin_btn_text_dark_default"/>
+                />
 
 
             <Button
@@ -172,9 +200,8 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/nextClick"
-                android:onClick="doNext (FaceTrackerActivity)"
+                android:onClick="doNext"
                 android:gravity="center"
-                android:textAlignment="center"
                 style="@style/Widget.AppCompat.Button.Small"
                 android:layout_marginTop="325dp" />
         </LinearLayout>

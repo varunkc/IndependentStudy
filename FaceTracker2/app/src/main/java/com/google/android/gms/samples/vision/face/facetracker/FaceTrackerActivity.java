@@ -44,6 +44,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -90,7 +91,7 @@ import static java.sql.Types.NULL;
 
 
 public final class FaceTrackerActivity extends AppCompatActivity {
-    private static final String TAG = "FaceTracker";
+    private static final String TAG = "Know Your TEXAS";
 
     private CameraSource mCameraSource = null;
 
@@ -105,7 +106,7 @@ public final class FaceTrackerActivity extends AppCompatActivity {
     private Handler mHandler = new Handler();
     //extra additions
     private Button click, nextQuestion;
-    private TextView instruction,score;
+    private TextView instruction,score, timerText, Guess;
     private EditText userData;
     private TextView fixed;
     private int countClicks, nextIndex, questionCount;
@@ -122,7 +123,7 @@ public final class FaceTrackerActivity extends AppCompatActivity {
     private DatabaseReference content;
     public String sIdNum;
     public final int[] IdNum = {0, 0};
-    public int correctCount = 0;
+    public int correctCount = 0, incorrectCount =0;
 
 
 
@@ -212,6 +213,9 @@ public final class FaceTrackerActivity extends AppCompatActivity {
         fixed = (TextView) findViewById(R.id.fixedInstruction);
         userData = (EditText) findViewById(R.id.userInput);
         score = (TextView) findViewById(R.id.count);
+        timerText = (TextView) findViewById(R.id.ClockText);
+        Guess = (TextView) findViewById(R.id.guess);
+
         userName="";
         countClicks = 0;
         alreadyGen = new int[getResources().getStringArray(R.array.commonTexts).length];
@@ -314,6 +318,8 @@ public final class FaceTrackerActivity extends AppCompatActivity {
             /*Storing username into Firebase*/
 
             content.child("Username").setValue(userName);
+            content.child("CorrectCount").setValue(correctCount);
+            content.child("IncorrectCount").setValue(incorrectCount);
 
             // pause p = new pause(5);
 
@@ -347,6 +353,7 @@ public final class FaceTrackerActivity extends AppCompatActivity {
                     userData.clearComposingText();
                     instruction.setText(getResources().getStringArray(R.array.commonTexts)[alreadyGen[0]]);
                     fixed.setVisibility(View.VISIBLE);
+                    Guess.setVisibility(View.VISIBLE);
                     nextQuestion.setVisibility(View.VISIBLE);
 
                     for (int i = 1; i < alreadyGen.length; i++)
@@ -359,11 +366,11 @@ public final class FaceTrackerActivity extends AppCompatActivity {
                     _tv.setVisibility(View.VISIBLE);
 
 
-                    new CountDownTimer(200000, 250) {
+                    new CountDownTimer(300000, 250) {
                         int sec = 0;
                         @Override
                         public void onTick(long millisUntilFinished) {
-                            long timeCompleted = 200000 - millisUntilFinished;
+                            long timeCompleted = 300000 - millisUntilFinished;
                             _tv.setText(String.format("%02d : %02d",
                                     TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished),
 
@@ -378,9 +385,21 @@ public final class FaceTrackerActivity extends AppCompatActivity {
                         @Override
                         public void onFinish() {
 
+
+                            AlertDialog closing = new AlertDialog.Builder(FaceTrackerActivity.this).create();
+                            closing.setTitle("Congratulations!!");
+                            closing.setMessage("You have scored" + Integer.toString(correctCount)+ "\nTHANK YOU");
+                            closing.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            System.exit(0);
+                                        }
+                                    });
+                            closing.show();
+
                         }
                     }.start();
-
+                    timerText.setVisibility(View.VISIBLE);
                 }
             };
             timer.start();
@@ -389,10 +408,15 @@ public final class FaceTrackerActivity extends AppCompatActivity {
         }
         else{
 
+
             if(!((getResources().getStringArray(R.array.answers)[nextIndex].toString().toLowerCase()).equals(userData.getText().toString().toLowerCase()))){
+
+                //push incorrect count
+                incorrectCount++;
+                content.child("IncorrectCount").setValue(incorrectCount);
                 AlertDialog alertDialog = new AlertDialog.Builder(FaceTrackerActivity.this).create();
-                alertDialog.setTitle("Error\n");
-                alertDialog.setMessage("Oops! Concentrate more and try again!");
+                alertDialog.setTitle("Oops!\n");
+                alertDialog.setMessage("You missed it. Try again ...");
                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
@@ -405,54 +429,59 @@ public final class FaceTrackerActivity extends AppCompatActivity {
             }
             else{
                 ++correctCount;
+                //push count into the database
+                content.child("CorrectCount").setValue(correctCount);
                 questionCount++;
-                Toast.makeText(getApplicationContext(), "Nice \n points : +1",
+                Toast.makeText(getApplicationContext(), "GOOD JOB..!!\nPoints: +1",
                         Toast.LENGTH_SHORT).show();
                 score.setText(Integer.toString(correctCount));
                 userData.setText("");
-            }
-
-//            if(countClicks >= 30)
-//                finish();
-
-            while(true){
-                int i;
-                boolean found;
-                nextIndex = (genIndex.nextInt(getResources().getStringArray(R.array.commonTexts).length));
-                found = false;
-                for(i = 0; (i < alreadyGen.length) && (alreadyGen[i] != -1); i++) {
-                    if (alreadyGen[i] == nextIndex) {
-                        found = true;
-
-                        break;
-                    }
-                }
-                Log.d(TAG,"COUNT = "+countClicks+"i = "+i);
-                if( countClicks == alreadyGen.length) {
-                    i = countClicks - 1;
-                    while (i > -1) {
-                        alreadyGen[i--] = -1;
-                    }
-                    alreadyGen[0] = nextIndex;
-                    countClicks = 1;
-                    break;
-                }
-                if(found)
-                    continue;
-                else {
-                    countClicks++;
-                    alreadyGen[i] = nextIndex;
-                    break;
-                }
+                generateQuestion(v);
 
             }
-            /*if (nextIndex > 30)
-                nextIndex = 0;*/
-            instruction.setText(getResources().getStringArray(R.array.commonTexts)[nextIndex]);
-            userData.clearComposingText();
 
 
         }
+    }
+
+    public void generateQuestion(View v) {
+
+
+        while(true){
+            int i;
+            boolean found;
+            nextIndex = (genIndex.nextInt(getResources().getStringArray(R.array.commonTexts).length));
+            found = false;
+            for(i = 0; (i < alreadyGen.length) && (alreadyGen[i] != -1); i++) {
+                if (alreadyGen[i] == nextIndex) {
+                    found = true;
+
+                    break;
+                }
+            }
+            Log.d(TAG,"COUNT = "+countClicks+"i = "+i);
+            if( countClicks == alreadyGen.length) {
+                i = countClicks - 1;
+                while (i > -1) {
+                    alreadyGen[i--] = -1;
+                }
+                alreadyGen[0] = nextIndex;
+                countClicks = 1;
+                break;
+            }
+            if(found)
+                continue;
+            else {
+                countClicks++;
+                alreadyGen[i] = nextIndex;
+                break;
+            }
+
+        }
+            /*if (nextIndex > 30)
+                nextIndex = 0;*/
+        instruction.setText(getResources().getStringArray(R.array.commonTexts)[nextIndex]);
+        userData.clearComposingText();
     }
 
     private void requestCameraPermission() {
